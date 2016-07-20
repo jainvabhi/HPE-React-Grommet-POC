@@ -9,7 +9,32 @@ Its a test [React](https://facebook.github.io/react/) project to create some sam
   - How to deal with [React Router](https://github.com/reactjs/react-router)
     - You can find router setup for [404 page](http://localhost:9000/404/) and [register](http://localhost:9000/register/) page.
 
-## Installation
+## Setup this locally:
+1) Clone the [Git Repo](https://github.com/jainvabhi/HPE-React-Grommet-POC)
+  ```sh
+  $ git clone git@github.com:jainvabhi/HPE-React-Grommet-POC.git
+  ```
+
+2) Use the Grommet generator to bootstrap your the POC app.
+  ```sh
+  $ cd HPE-React-Grommet-POC
+  ```
+
+3) Install all the node dependencies running
+  ```sh
+  $ npm install
+  ```
+
+4) Start a development server with hot reload enabled.
+  ```sh
+  $ gulp dev
+  ```
+
+5) Open [http://localhost:9000/webpack-dev-server/]
+
+  At this point, you should be able to see the application dashboard running.
+
+## Other way to fresh Grommet Installation
 Grommet requires [Node.js](https://nodejs.org/) latest stable version to run.
 
 1) Install NODE JS via Package Manager `Using Homebrew:`
@@ -26,20 +51,6 @@ Grommet requires [Node.js](https://nodejs.org/) latest stable version to run.
     ```sh
     $ npm install -g grommet
     ```
-
-3) Clone the [Git Repo](https://github.com/jainvabhi/HPE-React-Grommet-POC)
-
-4) Use the Grommet generator to bootstrap your the POC app.
-  ```sh
-  $ cd HPE-React-Grommet-POC
-  ```
-5) Start a development server with hot reload enabled.
-  ```sh
-  $ gulp dev
-  ```
-6) Open [http://localhost:9000/webpack-dev-server/]
-
-  At this point, you should be able to see the application dashboard running.
 
 Detailed instructions are on the [Get Started](http://grommet.io/docs/develop/get-started) page.
 
