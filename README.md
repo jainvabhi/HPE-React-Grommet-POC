@@ -21,10 +21,12 @@ Grommet requires [Node.js](https://nodejs.org/) latest stable version to run.
     ```sh
     $ npm install -g gulp
     ```
+
   - Install Grommet globally (make sure to run as an admin)
     ```sh
     $ npm install -g grommet
     ```
+
 3) Clone the [Git Repo](https://github.com/jainvabhi/HPE-React-Grommet-POC)
 
 4) Use the Grommet generator to bootstrap your the POC app.
