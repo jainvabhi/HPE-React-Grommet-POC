@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Box from 'grommet/components/Box';
 import Tiles from 'grommet/components/Tiles';
 import Tile from 'grommet/components/Tile';
@@ -16,7 +16,7 @@ export default class ContactList extends Component {
           <Tiles fill={true} align='start' pad={{"between": "small"}}>
             {this.props.cdata.map(function(contact) {
               return (
-                <Tile separator={contact.separator}>
+                <Tile separator="right">
                   <Header direction="column" align="start">
                     <Box >
                       <UserIcon colorIndex="brand" size="large"/>
@@ -39,4 +39,8 @@ export default class ContactList extends Component {
       </Box>
     );
   };
+};
+
+ContactList.propTypes = {
+  cdata: PropTypes.any.isRequired
 };

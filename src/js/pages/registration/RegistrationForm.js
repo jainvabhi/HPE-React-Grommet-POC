@@ -27,22 +27,80 @@ export default class RegistrationForm extends Component {
     this._onSecurityAnswer2Change = this._onSecurityAnswer2Change.bind(this);
     this._onDateChange = this._onDateChange.bind(this);
     this._onRadioChange = this._onRadioChange.bind(this);
+    this._validateEmail = this._validateEmail.bind(this);
+    this._validate = this._validate.bind(this);
 
     this.state = {
       email: undefined,
-      password: undefined,
+      password: "",
       confirmPassword: undefined,
       securityQuestion1: undefined,
       securityAnswer1: undefined,
       securityQuestion2: undefined,
       securityAnswer2: undefined,
       date: moment().format("M/D/YYYY"),
-      byEmail: 'Yes'
+      byEmail: 'Yes',
+      errorEmail: undefined,
+      errorPassword: "",
+      errorConfirmPassword: "",
+      errorSecurityQuestion: undefined,
+      errorSecurityAnswer: undefined,
+      errorSecurityQuestion2: undefined,
+      errorSecurityAnswer2: undefined
     };
+  }
+
+  
+
+  _validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
+  _validate() {
+    let email = this.state.email; 
+    let pass = this.state.password;
+    let confirmPass = this.state.confirmPassword;
+    
+    if ( this._validateEmail(email) ) {
+      this.setState({ errorEmail: undefined });
+    }else{
+      this.setState({ errorEmail: "invalid email" });
+    }
+
+    if( pass !== "" && pass == confirmPass ) {
+      
+      let re = /[0-9]/;
+      let ae = /[a-z]/;
+      let Ze = /[A-Z]/;
+
+      if ( pass.length < 6 ) {
+        this.setState({ errorPassword: "Password must contain at least six characters!" });
+        return false;
+      } else if ( !re.test(pass) ) {
+        this.setState({ errorPassword: "Password must contain at least one number (0-9)!" });
+        return false;
+      } else if ( !ae.test(pass) ) {
+        this.setState({ errorPassword: "Password must contain at least one lowercase letter (a-z)!" });
+        return false;
+      } else if ( !Ze.test(pass) ) {
+        this.setState({ errorPassword: "Password must contain at least one uppercase letter (A-Z)!" });
+        return false;
+      }
+      
+    } else {
+      this.setState({ errorPassword: "" });
+    }
+
+
+    
+
+    return false;
   }
 
   _onSubmit(e) {
     e.preventDefault();
+    this._validate();
     console.log(this.state);
   }
 
@@ -80,7 +138,7 @@ export default class RegistrationForm extends Component {
   }
 
   _onDateChange(e) {
-    this.setState({ date: e.format("M/D/YYYY") });
+    this.setState({ date: e.format("D/M/YYYY") });
   }
 
   _onRadioChange(e) {
@@ -94,16 +152,16 @@ export default class RegistrationForm extends Component {
           <Form>
             <FormFields>
               <fieldset>
-                <FormField label="Email" htmlFor="email" >
+                <FormField label="Email" htmlFor="email" error={this.state.errorEmail}>
                   <input id="email" type="email" value={this.state.email} onChange={this._onEmailChange} required />
                 </FormField>
-                <FormField label="Password" htmlFor="pass">
+                <FormField label="Password" htmlFor="pass" error={this.state.errorPassword}>
                   <input id="pass" type="password" value={this.state.password}  onChange={this._onPassChange} required />
                 </FormField>
-                <FormField label="Confirm Password" htmlFor="cpass">
+                <FormField label="Confirm Password" htmlFor="cpass" error={this.state.errorConfirmPassword}>
                   <input id="cpass" type="password" value={this.state.confirmPassword} onChange={this._onConfPassChange} required />
                 </FormField>
-                <FormField label="Security Question 1" htmlFor="sq1">
+                <FormField label="Security Question 1" htmlFor="sq1" error={this.state.errorSecurityQuestion}>
                   <select name="sq1" id="sq1" value={this.state.securityQuestion1} onChange={this._onSecurityQuestion1Change} required >
                     <option value="">Select a security question</option>
                     <option value="3">Where was your first job? (full name of city only)</option>
@@ -116,10 +174,10 @@ export default class RegistrationForm extends Component {
                     <option value="8">What was the last name of your first boyfriend/girlfriend?</option>
                   </select>
                 </FormField>
-                <FormField label="Security Question 1 Answer" htmlFor="sqAn1">
+                <FormField label="Security Question 1 Answer" htmlFor="sqAn1" error={this.state.errorSecurityAnswer}>
                   <input id="sqAn1" type="text" value={this.state.securityAnswer1} onChange={this._onSecurityAnswer1Change} required />
                 </FormField>
-                <FormField label="Security Question 2" htmlFor="sq2">
+                <FormField label="Security Question 2" htmlFor="sq2" error={this.state.errorSecurityQuestion2}>
                   <select name="sq2" id="sq2" value={this.state.securityQuestion2} onChange={this._onSecurityQuestion2Change} required >
                     <option value="">Select a security question</option>
                     <option value="3">Where was your first job? (full name of city only)</option>
@@ -132,11 +190,11 @@ export default class RegistrationForm extends Component {
                     <option value="8">What was the last name of your first boyfriend/girlfriend?</option>
                   </select>
                 </FormField>
-                <FormField label="Security Question 2 Answer" htmlFor="sqAn1">
+                <FormField label="Security Question 2 Answer" htmlFor="sqAn1" error={this.state.errorSecurityAnswer2}>
                   <input id="sqAn1" type="text" value={this.state.securityAnswer2} onChange={this._onSecurityAnswer2Change} required />
                 </FormField>
                 <FormField label="Select Date" htmlFor="dateID">
-                  <DateTime id="dateID" name="SelectDate" format="M/D/YYYY" onChange={this._onDateChange} value={this.state.date} />
+                  <DateTime id="dateID" name="SelectDate" format="D/M/YYYY" onChange={this._onDateChange} value={this.state.date} />
                 </FormField>
                 <FormField label="Contact by Email" help="May HP contact you with personalized offers, support updates, and event news? Please indicate below how HP may contact you.">
                   <RadioButton id="{choice1-1}" name="choice" label="Yes" value="Yes" defaultChecked={true} onChange={this._onRadioChange} />

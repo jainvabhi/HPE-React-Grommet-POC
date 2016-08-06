@@ -38,7 +38,7 @@ export default class LayoutHeader extends Component {
               </Link>
             </Title>
 
-            <HeaderMenu menus={menuJSON} />
+            <HeaderMenu sss={menuJSON} />
 
             <Box pad="small">
               <Search dropAlign={{"right": "right"}} placeholder="search" />
@@ -53,23 +53,28 @@ export default class LayoutHeader extends Component {
 
 var menuJSON = [
   {
+    id: "0",
     name: "Solutions",
-    url: "http://www.google.com"
+    url: "http://www.google.com/1"
   },
   {
+    id: "1",
     name: "Services",
-    url: "http://www.google.com"
+    url: "http://www.google.com/2"
   },
   {
+    id: "2",
     name: "Products",
-    url: "http://www.google.com"
+    url: "http://www.google.com/3"
   },
   {
+    id: "3",
     name: "About Us",
-    url: "http://www.google.com"
+    url: "http://www.google.com/4"
   },
   {
+    id: "4",
     name: "Support",
-    url: "http://www.google.com"
+    url: "http://www.google.com/5"
   }
 ];
